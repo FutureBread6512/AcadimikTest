@@ -11,26 +11,26 @@
             <a-entity 
                 id="academiaINK"
                 gltf-model="url(https://raw.githubusercontent.com/FutureBread6512/3DModelTest/main/model.gltf)" 
-                scale="1 1 1" 
-                position="0 -3 0"
-                animation="property: position; to: 0 -1 0; dur: 2000; easing: easeInOutQuad; startEvents: rise; loop: false">
+                scale="0 0 0" 
+                position="0 1 0"
+                animation__appear="property: scale; from: 0 0 0; to: 1 1 1; dur: 2000; easing: easeInOutQuad; startEvents: appear"
+                animation__disappear="property: scale; from: 1 1 1; to: 0 0 0; dur: 2000; easing: easeInOutQuad; startEvents: disappear">
             </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
-        const academiaINK = document.querySelector('#academiaINK');
-
-        // Trigger the rise animation
-        academiaINK.addEventListener('model-loaded', () => {
-            // Start the rise animation
-            academiaINK.emit('rise');
-            // After 2 seconds, return to original position
+        const model = document.querySelector('#academiaINK');
+        
+        // Trigger appear animation when marker is found
+        document.querySelector('a-marker').addEventListener('markerFound', () => {
+            model.emit('appear');
+            
+            // Set timeout to trigger disappear animation after 5 seconds
             setTimeout(() => {
-                academiaINK.setAttribute('animation', 'property: position; to: 0 -2 0; dur: 2000; easing: easeInOutQuad; startEvents: return');
-                academiaINK.emit('return');
-            }, 2000);
+                model.emit('disappear');
+            }, 5000);
         });
     </script>
 </body>
