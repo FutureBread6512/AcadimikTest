@@ -12,8 +12,8 @@
                 id="academiaINK"
                 gltf-model="url(https://raw.githubusercontent.com/FutureBread6512/3DModelTest/main/model.gltf)" 
                 scale="1 1 1" 
-                position="0 -1 0"
-                animation="property: position; to: 0 4 0; dur: 2000; easing: easeInOutQuad; startEvents: rise; pauseEvents: stay; loop: false">
+                position="0 -3 0"
+                animation="property: position; to: 0 -1 0; dur: 2000; easing: easeInOutQuad; startEvents: rise; loop: false">
             </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
@@ -26,15 +26,11 @@
         academiaINK.addEventListener('model-loaded', () => {
             // Start the rise animation
             academiaINK.emit('rise');
-            // After 2 seconds, emit the stay event
+            // After 2 seconds, return to original position
             setTimeout(() => {
-                academiaINK.emit('stay');
-            }, 2000);
-            // After 9 seconds (2 seconds rise + 7 seconds stay), return to original position
-            setTimeout(() => {
-                academiaINK.setAttribute('animation', 'property: position; to: 0 1 0; dur: 2000; easing: easeInOutQuad; startEvents: return');
+                academiaINK.setAttribute('animation', 'property: position; to: 0 -2 0; dur: 2000; easing: easeInOutQuad; startEvents: return');
                 academiaINK.emit('return');
-            }, 9000);
+            }, 2000);
         });
     </script>
 </body>
